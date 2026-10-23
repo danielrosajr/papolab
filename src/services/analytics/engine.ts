@@ -3,8 +3,8 @@ import {dayStart,keyDay,keyMonth,median} from '../../utils/format'
 import {mediaSubtype} from '../parser/whatsapp'
 import {makeInsights,makeTrophies} from '../insights/rules'
 
-const common = new Set('a o e é de da do dos das um uma em no na nos nas para por com que se os as eu você voce vocês voces nós nos meu minha seu sua ele ela eles elas mas ou foi sou são esse essa isso isto aquele aqui ali lá já não nao sim em pra pro por favor agora bem muito mais menos ter tem tinha quando como quem onde porque então até ainda também mesmo tudo todos cada tô ta tá estou ser era assim sobre depois antes hoje ontem amanhã gente aos pelas pelos numa num desde sem pelo pela vou vai vamos qual quais há à às às'.split(' '))
-export function tokens(s:string):string[] {return s.toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').match(/[a-zà-ÿ0-9]{2,}/gi)||[]}
+import {tokens,termsForRanking} from './language'
+export {tokens,termsForRanking} from './language'
 export function best(list:CountItem[]):CountItem|null{return [...list].sort((a,b)=>b.value-a.value||a.key.localeCompare(b.key))[0]||null}
 function countMap(m:Map<string,number>,s:string,n=1) {m.set(s,(m.get(s)||0)+n)}
 const counts=(map:Map<string,number>):CountItem[]=>[...map].map(([key,value])=>({key,value})).sort((a,b)=>a.key.localeCompare(b.key))
@@ -47,7 +47,8 @@ export function analyze(messages:ChatMessage[],gapHours=8,contentAnalysis=true):
       if(/\b(te amo|amo você|amo voce|saudades|saudade|meu amor|minha vida|te adoro)\b/i.test(text)) {p.love++;loveExpressions++}
       p.hearts+=(text.match(/[❤♥💗💖💕💓💞💘💝💜💙💚💛🧡🤍🖤]/gu)||[]).length
       if(/[a-záéíóúãõç]/i.test(text)&&text===text.toLocaleUpperCase('pt-BR')&&text.length>=5)p.uppercase++
-      for(const t of w) {vocab.get(author)!.add(t);if(!common.has(t)&&t.length>2)countMap(words,t)}
+      for(const t of w)vocab.get(author)!.add(t)
+      for(const term of termsForRanking(text))countMap(words,term)
     }
     const isNew=!prev||m.timestamp-prev.timestamp>gap
     if(isNew) {

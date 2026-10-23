@@ -1,128 +1,79 @@
-# 💬 PapoLab — Cada conversa conta uma história
+# 💬 PapoLab — Laboratório de conversas
 
-**Laboratório local de conversas do WhatsApp.** Transforme um `.txt` ou `.zip` de exportação em gráficos, rankings, troféus, memórias e cartões PNG compartilháveis, **sem login, backend, API ou upload de conteúdo privado**.
+**v0.2.0** · Vue 3 + TypeScript + Vite · Processamento no navegador · Publicação gratuita no GitHub Pages
 
-> **v0.1.0 · Primeira versão funcional / base evolutiva.** Interface em português brasileiro. Projeto preparado para GitHub Pages.
+Importe uma conversa exportada do WhatsApp (TXT ou ZIP), explore dez módulos de análise, veja dados estatísticos, recordes, troféus e retrospectivas por ano. O histórico é processado localmente: sem backend, sem login e sem envio de mensagens para um servidor.
 
-## O que funciona nesta versão
+## Novidades da v0.2.0
 
-- Importação TXT e ZIP; formatos comuns de Android e iOS, multilinha, AM/PM, datas brasileiras e internacionais, mensagens de sistema, mídia omitida e mensagens apagadas.
-- Confirmação obrigatória quando a ordem das datas for ambígua; prévia de mensagens reconhecidas oculta até a pessoa clicar para revelar.
-- Motor de estatísticas com respostas por troca de turno, sessões (limite ajustável, padrão 8h), média/mediana, atividade, vocabulário, emojis, perguntas explícitas e muito mais.
-- **10 modos reais de exploração:** Visão Geral, Detetive, Amigos, Casal, Grupos, Família, Linguagem, Nostalgia, Comunicação e Wrapped. Cada um prioriza dados e interações diferentes.
-- Comparador de participantes, descobertas explicadas, prêmios com limites mínimos, rastreador de expressões, máquina do tempo por ano, marcos e memórias manuais temporárias.
-- Filtros por participante, intervalo de datas, tipo, dia da semana e faixa de horários.
-- Geração de PNG nativa em **9:16, 1:1 e 16:9**, oito paletas, seleção de conteúdos, anonimização e ocultação de datas **ativadas por padrão**. Exportação adicional de resumo JSON agregado e anonimizado.
-- Dark/light, layout responsivo, modo demo com conversa 100% inventada, PWA com cache offline dos recursos depois da primeira visita.
+- **Ranking linguístico limpo:** links, sites, e-mails, números isolados e palavras de preenchimento deixam de poluir a nuvem. Expressões como `bom dia`, `boa noite`, `boa tarde`, `tudo bem` e `te amo` são contadas como uma unidade (em vez de contabilizar suas palavras separadamente). Não há interpretação semântica ou IA externa.
+- **Contatos ignorados:** no painel **Refinar análise → Ignorar pessoas ou números**, marque um ou mais participantes. Gráficos, cards, estatísticas, comparações e retrospectivas passam a desconsiderar suas mensagens. Não remove mensagens do arquivo; desmarcar recupera a análise original.
+- **Auditoria de palavras e mensagens:** no módulo **Linguagem**, clique num termo frequente e role para a seção **Auditoria dos dados**. Veja as mensagens reais, o trecho destacado, os termos que contribuíram para o ranking e quais mensagens ficaram de fora por exclusão de participantes. Mensagens ficam ocultas até clicar para revelar ou solicitar uma auditoria.
+- **Explicação dos dez modos:** cada painel apresenta "quando usar", "o que você vai encontrar" e "o que não podemos concluir".
+- **Retrospectiva de ano:** em **Wrapped**, escolha 2026, 2025 ou outro ano presente no arquivo. O aplicativo recalcula os slides, gráficos, pessoas, recordes e permite criar **um cartão PNG daquele ano**. O módulo **Nostalgia** também ganhou relatório anual detalhado com botão para compartilhar.
+- **Esconder termos da nuvem:** personalize quais palavras aparecem nesse ranking, sem alterar métricas de outras telas.
 
-### Limitações transparentes da v0.1
+## Funcionalidades
 
-- Indicadores de áudios, figurinhas e mídias dependem dos marcadores de texto presentes no export, não analisam anexos e **não medem duração**.
-- O parser cobre **formatos comuns**, não todas as traduções, regiões e versões possíveis do WhatsApp. Confirme o início, o fim e a prévia. Arquivos com formatos mistos ou datas imprecisas podem exigir ajustes posteriores.
-- Um arquivo pode ter meses/anos parciais. Variações não devem ser tratadas como causas nem prova de um fato pessoal. Tempo de resposta medido por turnos não equivale a prazo real de resposta.
-- Emojis compostos (sequências Unicode) podem ser contabilizados por partes. Risadas, palavras carinhosas e perguntas são **detecções heurísticas de texto explícito**, não diagnósticos emocionais.
-- Limite de arquivo de 100 MB para evitar consumo de memória extremo. O parser roda em Worker; recalcular filtros/estatísticas ainda é síncrono e históricos excepcionalmente grandes podem causar lentidão.
-- Não salva conversas ou memórias entre visitas. Paleta de cores pode ficar armazenada localmente; os dados da conversa só permanecem na memória da aba.
-- A função Wrapped possui slides interativos, mas a exportação de PNG é de um **cartão-resumo**, não da sequência animada. Exportação de vídeo/PDF e comparações entre dois arquivos são futuras melhorias.
-- Interface inicialmente em português. Internacionalização completa é evolução futura.
+- Importação TXT/ZIP, exportações comuns Android/iOS, múltiplas linhas, datas ambíguas, textos e sinalizações de mídia.
+- Módulos **Visão geral**, **Detetive**, **Amigos**, **Casal**, **Grupos**, **Família**, **Linguagem**, **Nostalgia**, **Comunicação** e **Wrapped**.
+- Filtros por autor, autores ignorados, datas, tipo, dia da semana e faixa horária.
+- Métricas de respostas por troca de autor, sessões (pausa ajustável), mediana, total, rankings, vocabulário e atividade.
+- Cartões PNG em 9:16, 1:1 e 16:9, com oito temas, anonimização e ocultação de datas ativadas por padrão.
+- Dark/light, modo demo sintético, PWA/offline após carregamento inicial, relatório JSON agregado.
 
-## Executar no Ubuntu (Node.js 22 recomendado)
+## Atualizar pelo navegador — sem terminal Git
+
+### Atualização a partir da v0.1.1
+
+1. Extraia **`papolab-v0.2.0-atualizacao-github.zip`** no computador.
+2. Abra [seu repositório](https://github.com/danielrosajr/papolab) no GitHub.
+3. Para atualizar pastas e arquivos diretamente no navegador, pressione **`.`** na página do repositório para abrir o editor `github.dev`. No painel de arquivos, substitua os arquivos existentes pelos arquivos extraídos e adicione os dois novos (`src/services/analytics/language.ts` e `tests/language.test.ts`), mantendo a estrutura de pastas.
+4. Abra **Source Control**, revise as alterações e confirme o commit na branch `main`.
+5. Em **Actions**, acompanhe o workflow **Publicar PapoLab no GitHub Pages**. Se necessário, em **Settings → Pages**, escolha **GitHub Actions** como origem.
+
+Se preferir o GitHub tradicional, navegue até a pasta correspondente e use **Add file → Upload files** para cada conjunto de arquivos. O importante é **não jogar arquivos de `src/` na raiz**: preserve os diretórios do ZIP.
+
+**Commit sugerido:** `feat: PapoLab v0.2.0 com expressões, exclusão de participantes e Wrapped anual`
+
+**Tag / release:** `v0.2.0` (GitHub → Releases → Draft a new release → Choose a tag → Create new tag `v0.2.0`).
+
+### Instalar pela primeira vez
+
+Extraia **`papolab-v0.2.0-completo-github.zip`**, crie um repositório público e envie a estrutura do projeto. Depois, em **Settings → Pages → Build and deployment**, selecione **GitHub Actions**. A URL de um repositório de projeto será `https://SEU-USUARIO.github.io/papolab/`.
+
+## Desenvolver e testar localmente (opcional)
+
+No Ubuntu, com Node.js 22:
 
 ```bash
-# Descompacte o ZIP e acesse a pasta papolab
-cd papolab
 npm install
 npm run dev
 ```
 
-Abra o endereço que o Vite mostrar (geralmente http://localhost:5173). Para validar:
+Depois de instalar dependências, também é possível executar:
 
 ```bash
 npm test
 npm run build
-npm run preview
 ```
 
-Após o primeiro `npm install`, considere adicionar o `package-lock.json` gerado ao Git para tornar futuras instalações reproduzíveis. Este pacote fonte não inclui um lockfile pré-gerado. A pasta `dist/` é o build de produção. `examples/` traz exportações totalmente sintéticas para testes; o botão de demonstração gera muitos outros dados locais.
+O deploy do GitHub Actions já roda testes, verificação TypeScript e build do Vite. Nenhuma conexão Git via terminal é necessária para publicar a atualização.
 
-## Publicar no GitHub Pages — passo a passo
+## Metodologia e limitações
 
-1. Crie um repositório **público** no GitHub, por exemplo `papolab`.
-2. Na pasta do projeto, execute:
+- **Frases combinadas:** `bom dia` ocupa um termo próprio em vez de somar `bom` e `dia` na nuvem. Regras locais e reproduzíveis em `src/services/analytics/language.ts`; o vocabulário de expressões pode crescer. Palavras comuns (stopwords) são removidas apenas do **ranking**, não das mensagens do arquivo.
+- **Contagem:** o ranking soma ocorrências, enquanto a auditoria indica número de **mensagens** que contêm a expressão. Uma mensagem com duas ocorrências pode valer 2 no ranking e 1 na auditoria.
+- **Exclusão de participantes:** recalcula dados somente com as mensagens não excluídas. Ao remover um autor intermediário, as sessões e os intervalos de respostas remanescentes podem mudar; não é uma reconstrução de quem teria escrito no mundo real.
+- **Datas/retrospectivas:** o PapoLab só conhece o intervalo importado. Um resumo de 2026 pode representar janeiro–outubro, por exemplo, e não pressupõe dezembro. Filtros globais também se aplicam ao ano selecionado.
+- **Privacidade:** mensagens e nomes não saem do dispositivo. O editor de compartilhamento permite optar por revelar nomes; a anonimização vem ativada. Peça consentimento antes de compartilhar dados que possam identificar outras pessoas.
+- **Importação:** formatos regionais incomuns podem não ser reconhecidos; consulte as mensagens reconhecidas após importar. Indicadores de áudio/figurinha dependem dos marcadores disponíveis, não da análise das mídias reais.
+- **Desempenho:** leitura usa Web Worker, mas filtros estatísticos ainda são síncronos no navegador. Históricos enormes podem gerar pausas em celulares de baixa memória. Limite de importação: 100 MB.
+- **PWA:** funcionamento offline depende de ao menos uma visita bem-sucedida e do armazenamento em cache do navegador.
+- **A fazer:** exportação de slideshow completo, comparação entre arquivos distintos, internacionalização completa e outras expansões.
 
-```bash
-git init
-git add .
-git commit -m "feat: lançar PapoLab v0.1.0 com parser, dez modos e cartões PNG"
-git branch -M main
-git remote add origin https://github.com/SEU-USUARIO/papolab.git
-git push -u origin main
-```
+## Testes incluídos
 
-3. No repositório: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-4. Abra a aba **Actions** e acompanhe **Publicar PapoLab no GitHub Pages**. O workflow executa `npm install`, testes, build e deploy automaticamente a cada push em `main`.
-5. A URL prevista para um repositório de projeto é `https://SEU-USUARIO.github.io/papolab/`. O **nome real do repositório determina a URL**.
+`tests/parser.test.ts` (formatos Android/iOS), `tests/analytics.test.ts` (métricas), `tests/export.test.ts` (anonimização) e `tests/language.test.ts` (links, frases, acentos, exclusão e datas).
 
-**Importante:** `vite.config.ts` detecta automaticamente `GITHUB_REPOSITORY` no GitHub Actions e configura o caminho de base como `/nome-do-repositorio/`. Para repositórios `SEU-USUARIO.github.io`, usa `/`. Para publicar manualmente em uma subpasta diferente, rode `VITE_BASE_PATH=/sua-pasta/ npm run build`.
-
-Se quiser usar `gh` (GitHub CLI autenticado):
-
-```bash
-git init && git add . && git commit -m "feat: lançar PapoLab v0.1.0"
-git branch -M main
-gh repo create papolab --public --source=. --remote=origin --push
-```
-
-Depois configure **Settings → Pages → GitHub Actions**. Este ZIP não cria nem publica repositórios por conta própria.
-
-## Estrutura
-
-```text
-papolab/
-├── .github/workflows/deploy.yml   # build, teste e GitHub Pages
-├── examples/                       # dados de teste fictícios
-├── public/                         # ícone PWA
-├── src/
-│   ├── components/                 # gráficos, módulos, comparação, exportação
-│   ├── data/demo/                  # dataset inventado
-│   ├── modules/                    # catálogo dos 10 módulos
-│   ├── services/
-│   │   ├── parser/                 # TXT, ZIP e datas
-│   │   ├── analytics/              # motor matemático
-│   │   ├── insights/               # descobertas e troféus
-│   │   └── export/                 # gerador de PNG via Canvas
-│   ├── types/                      # contratos TypeScript
-│   ├── utils/                      # datas e formatação
-│   ├── workers/                    # parsing fora da thread principal
-│   ├── App.vue                     # experiência e estado em memória
-│   └── style.css                   # design responsivo
-├── tests/                          # testes Vitest
-└── vite.config.ts                  # PWA + base dinâmica
-```
-
-## Critérios e privacidade
-
-- **Mensagens totais:** entradas atribuídas a pessoas, sem contar mensagens de sistema.
-- **Sessões:** períodos separados por mais de X horas sem mensagens; X é configurável (padrão: 8h).
-- **Tempo de resposta:** apenas mudanças de autor dentro de uma sessão; mediana em minutos. Mensagens sucessivas de uma mesma pessoa não geram várias respostas. Pausas longas que iniciam novas sessões são excluídas.
-- **Dias ativos:** datas locais com mensagens; **dias vazios**: datas dentro do intervalo importado sem registros.
-- **Troféus:** ao menos 10 mensagens por participante elegível e um número mínimo no indicador do prêmio.
-- **Compartilhamento:** prévia exata em Canvas; nomes anonimizados, datas ocultas e trechos privados excluídos por padrão; PNG baixado somente ao clicar. Revise o conteúdo antes de compartilhar, inclusive com outros participantes.
-- **Sem telemetria:** sem ferramentas de tracking e sem Google Fonts/remotos; após publicar o app estático, os históricos ficam no navegador. GitHub Pages, enquanto hospeda os arquivos públicos do site, pode receber requisições normais para baixar o aplicativo e seus recursos, mas não recebe a conversa importada.
-- **Apagar tudo:** “Apagar conversa e sair” libera o estado de conversas na interface. Fechar a aba descarta os dados não persistidos. Observação: navegadores podem gerenciar memória de forma própria; o app não salva dados da conversa em localStorage, IndexedDB ou servidores.
-
-Este produto foi pensado para análises de conversas às quais o usuário tenha acesso legítimo, com respeito ao consentimento e à privacidade das pessoas. Não infere mentira, traição, fidelidade, qualidade da relação, inteligência, intenção ou estado psicológico.
-
-## Atualizar no futuro
-
-1. Altere arquivos e testes.
-2. Mude `version` no `package.json` e registre novidades no `CHANGELOG.md`.
-3. Rode `npm test && npm run build`.
-4. Faça `git add . && git commit -m "feat: descrever melhoria" && git push`.
-5. Em **Releases**, crie a tag correspondente à versão (ex.: `v0.2.0`).
-
-**Primeira tag sugerida:** `v0.1.0`. **Nome da release:** `PapoLab v0.1.0 — O início do laboratório`.
-
-## Licença
-
-MIT — consulte `LICENSE`.
+Projeto livre para uso e aprimoramento; leia `LICENSE`.

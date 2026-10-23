@@ -3,13 +3,13 @@ import type { ChatMessage, ParsedChat } from '../../types'
 export function demoChat(): ParsedChat {
   const names = ['Lia', 'Rafa', 'Bia', 'Caio', 'Duda']
   const texts = [
-    'Bom diaaa! ☀️', 'kkkkkkkk não acredito 😂', 'Quem topa sair sábado?', 'Eu topo! ❤️',
+    'Bom dia! ☀️', 'kkkkkkkk não acredito 😂', 'Quem topa sair sábado?', 'Eu topo! ❤️',
     'Tô chegando em 10 minutos', 'Gente, olha isso 👀', 'Saudades de vocês 💜', 'Partiu café? ☕',
     'A melhor ideia de todas!!!', 'O que vocês acham?', 'SOCORRO KKKKK', 'Te amo, família 💕',
     'Vou mandar áudio depois', 'Nossa, que história maravilhosa', 'Já resolveram aquilo?',
     'Precisamos marcar outro encontro!', '😂😂😂', 'Isso merece um textão enorme explicando tudo e organizando cada detalhe da nossa próxima aventura.',
     'A foto ficou linda! 😍', 'Feliz aniversário! 🎂', 'E aí, bora?', 'Saudades daquela viagem de julho!',
-    'A gente se fala depois?', 'Boa noite, pessoal 🌙'
+    'A gente se fala depois?', 'Boa noite, pessoal 🌙', 'Tudo bem por aí?', 'Boa tarde, turma!'
   ]
   const messages: ChatMessage[] = []
   let id=0

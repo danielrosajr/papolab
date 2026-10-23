@@ -23,4 +23,4 @@ export interface Analytics {
   gapHours: number; insights: Insight[]; trophies: Trophy[]
 }
 export type ModuleId = 'overview' | 'detective' | 'friends' | 'couple' | 'groups' | 'family' | 'language' | 'nostalgia' | 'communication' | 'wrapped'
-export interface ModuleDefinition { id: ModuleId; name: string; emoji: string; kicker: string; description: string; accent: string }
+export interface ModuleDefinition { id: ModuleId; name: string; emoji: string; kicker: string; description: string; accent: string; useWhen: string; shows: string; limits: string }

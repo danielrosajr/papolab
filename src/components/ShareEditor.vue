@@ -2,12 +2,12 @@
 import {computed,nextTick,onMounted,ref,watch} from 'vue'
 import type {Analytics,ModuleDefinition} from '../types'
 import {drawShareCard} from '../services/export/card'
-const props=defineProps<{data:Analytics;module:ModuleDefinition}>()
+const props=defineProps<{data:Analytics;module:ModuleDefinition;initialTitle?:string}>()
 const emit=defineEmits<{close:[]}>()
 const target=ref<HTMLCanvasElement|null>(null)
 const format=ref<'story'|'square'|'wide'>('story')
 const theme=ref('neon')
-const title=ref('Nossa conversa em números')
+const title=ref(props.initialTitle||'Nossa conversa em números')
 const anonymous=ref(true),hideDates=ref(true),showWords=ref(false),showRank=ref(true),showRecords=ref(true)
 const options=computed(()=>({format:format.value,theme:theme.value,title:title.value,anonymous:anonymous.value,hideDates:hideDates.value,showWords:showWords.value,showRank:showRank.value,showRecords:showRecords.value}))
 function draw(){if(target.value)drawShareCard(target.value,props.data,props.module,options.value)}
