@@ -1,3 +1,9 @@
+## v0.1.1 — Correção do build (2026-10-23)
+
+- Removidos os atributos duplicados `min` e `max` nos controles de hora do `App.vue`, que causavam TS1117.
+- Adicionado `@types/node` e a configuração de tipos Node para permitir `process.env` em `vite.config.ts` (TS2591).
+- Nenhuma alteração nas estatísticas ou no processamento de conversas.
+
 # Histórico de versões
 
 ## v0.1.0 — 2026-10-23
